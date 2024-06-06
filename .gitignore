@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# MS VS Stuff
+*.vs
+
 # Compiled Object files
 *.slo
 *.lo
@@ -10,6 +13,9 @@
 # Precompiled Headers
 *.gch
 *.pch
+
+# JSon Presets
+*.json
 
 # Compiled Dynamic libraries
 *.so
@@ -26,7 +32,8 @@
 *.a
 *.lib
 
-# Executables
+# Executables and out folders
 *.exe
 *.out
 *.app
+/out
