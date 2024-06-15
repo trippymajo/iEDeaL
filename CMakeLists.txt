@@ -17,13 +17,22 @@ qt_standard_project_setup()
 set(SOURCES
     Main.cpp
     MainWindow.cpp
+    EdlFile.cpp
 )
 
 set(HEADERS
     MainWindow.h
+    EdlFile.h
 )
 
 qt_add_executable(iEDeaL ${SOURCES} ${HEADERS})
+
+if(MSVC OR (CMAKE_CXX_COMPILER_ID STREQUALCMAKE_CXX_COMPILER_ID STREQUAL "GNU") OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")) 
+    target_sources(iEDeaL PRIVATE stdafx.cpp)
+    target_precompile_headers(iEDeaL PRIVATE stdafx.h)
+else()
+    message(FATAL_ERROR "Your compiler does not support precompiled headers. Ha-ha!")
+endif()
 
 set_target_properties(iEDeaL
     PROPERTIES
