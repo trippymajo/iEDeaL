@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainWindow.h"
+#include "EdlFile.h"
 
 #include <QMainWindow>
 
@@ -14,8 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 
   QWidget* MenuBar = new QWidget;
-  MenuBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
   createActions();
   makeMenuBar();
 
@@ -56,7 +55,20 @@ void MainWindow::saveAsFile()
 
 void MainWindow::exportEDL()
 {
-  //TODO
+  QString fileName = QFileDialog::getOpenFileName(this, tr("File to export from"), "", tr("Edit Decision Lists (*.edl);;All files (*.*)"));
+    if (fileName.isEmpty())
+    {
+      QMessageBox::warning(this, tr("Error!"), tr("Exporting file name is empty!"));
+      return;
+    }
+
+  QFile file(fileName);
+  if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+  {
+    EdlFile edlFile(&file, m_pTextEdit);
+    edlFile.ParseEdlFile();
+  }
+  file.close();
 }
 
 void MainWindow::exitProg()
@@ -121,6 +133,11 @@ void MainWindow::createActions()
   m_pActFileSaveAs->setStatusTip(tr("Save current file as txt"));
   connect(m_pActFileSaveAs, &QAction::triggered, this, &MainWindow::saveAsFile);
 
+  m_pActFileExportEDL = new QAction(tr("&Export"));
+  m_pActFileExportEDL->setShortcut(QKeySequence("Ctrl+E"));
+  m_pActFileExportEDL->setStatusTip(tr("Open a EDL file to export"));
+  connect(m_pActFileExportEDL, &QAction::triggered, this, &MainWindow::exportEDL);
+
   m_pActFileExit = new QAction(tr("E&xit"), this);
   m_pActFileExit->setShortcuts(QKeySequence::Quit);
   m_pActFileExit->setStatusTip(tr("Exit program"));
@@ -137,6 +154,8 @@ void MainWindow::makeMenuBar()
   m_pFileMenu->addAction(m_pActFileNew);
   m_pFileMenu->addAction(m_pActFileSave);
   m_pFileMenu->addAction(m_pActFileSaveAs);
+  m_pFileMenu->addAction(m_pActFileExportEDL);
+  m_pFileMenu->addAction(m_pActFileExit);
 
 }
 
