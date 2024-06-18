@@ -16,6 +16,9 @@ const static QString s_strPatternsEdl [] =
 
 static int s_iPattensEdlSize = sizeof(s_strPatternsEdl) / sizeof(s_strPatternsEdl[0]);
 
+/// @brief  Converts time from HH:MM:SS:mm to MM::SS if possible
+/// @param  str  -  string to copy
+/// @return  QString  -  Copy of the passed parameter in right format
 QString makeNiceTime(const QString& str)
 {
   QString retVal = str;

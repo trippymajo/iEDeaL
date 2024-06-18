@@ -5,9 +5,10 @@ class EdlFile : public QTextStream
 {
   // Constructor
 public:
-  // *\brief  EdlFile text stream costructor
-  // *\param device  -  pointer to QFile object
 
+  /// @brief  EdlFile text stream costructor
+  /// @param  [OUT] device  -  poiner to file for read
+  /// @param  [OUT] plainTextEdit  -  pointer to plain text edit widget
   EdlFile(QIODevice* device, QPlainTextEdit* plainTextEdit) : QTextStream(device) 
   {
     m_bIsSameSong = false;
@@ -17,9 +18,17 @@ public:
     m_pTextEdit = plainTextEdit;
   };
 
+  /// @brief reads line from stream and parses it
   void parseEdlFile();
+
+
 private:
+  /// @brief  Writes string containing TITLE: infromation to PlainTextEdit
+  /// @param  strLine  -  line to wrtite data from
   void writeTitle(const QString& strLine);
+
+  /// @brief  Writes track's times and names from string line & TextStream
+  /// @param  strLine  -  line to wrtite data from
   void writeContent(const QString& strLine);
 
   bool            m_bIsSameSong;
