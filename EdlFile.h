@@ -7,6 +7,7 @@ class EdlFile : public QTextStream
 public:
   // *\brief  EdlFile text stream costructor
   // *\param device  -  pointer to QFile object
+
   EdlFile(QIODevice* device, QPlainTextEdit* plainTextEdit) : QTextStream(device) 
   {
     m_bIsSameSong = false;
@@ -16,10 +17,10 @@ public:
     m_pTextEdit = plainTextEdit;
   };
 
-  void ParseEdlFile();
+  void parseEdlFile();
 private:
-  void WriteTitle(const QString& strLine);
-  void WriteContent(const QString& strLine);
+  void writeTitle(const QString& strLine);
+  void writeContent(const QString& strLine);
 
   bool            m_bIsSameSong;
   QString         m_strSongName;

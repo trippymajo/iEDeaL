@@ -25,7 +25,7 @@ QString makeNiceTime(const QString& str)
   return retVal;
 }
 
-void EdlFile::WriteContent(const QString& strLine)
+void EdlFile::writeContent(const QString& strLine)
 {
   //Read second line of the block
   QString strSongName;
@@ -50,12 +50,12 @@ void EdlFile::WriteContent(const QString& strLine)
   }
 }
 
-void EdlFile::WriteTitle(const QString &strLine)
+void EdlFile::writeTitle(const QString &strLine)
 {
   m_pTextEdit->appendPlainText(strLine);
 }
 
-void EdlFile::ParseEdlFile()
+void EdlFile::parseEdlFile()
 {
   while (!QTextStream::atEnd())
   {
@@ -68,7 +68,7 @@ void EdlFile::ParseEdlFile()
     for (int i = 0; i < s_iPattensEdlSize; ++i)
     {
       if (strLine.contains(QRegularExpression(s_strPatternsEdl[i])))
-        i == 1 ? WriteContent(strLine) : WriteTitle(strLine);
+        i == 1 ? writeContent(strLine) : writeTitle(strLine);
     }
   }
 }
