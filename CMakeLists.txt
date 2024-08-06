@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(iEDeaL VERSION 0.1 LANGUAGES CXX)
+project(iEDeaL VERSION 1.0 LANGUAGES CXX)
 
 #CMAKE_AUTOMOC
 set(CMAKE_AUTOMOC ON)
@@ -26,11 +26,16 @@ set(HEADERS
     EdlFile.h)
 
 #Exe
-qt_add_executable(iEDeaL ${SOURCES} ${HEADERS})
+if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+  qt_add_executable(iEDeaL ${SOURCES} ${HEADERS})
+else()
+  add_executable(iEDeaL ${SOURCES} ${HEADERS})
+endif()
 
 #Link
 target_link_libraries(iEDeaL PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
+#Target properties
 set_target_properties(iEDeaL PROPERTIES WIN32_EXECUTABLE TRUE)
 
 if(MSVC OR (CMAKE_CXX_COMPILER_ID STREQUALCMAKE_CXX_COMPILER_ID STREQUAL "GNU") OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")) 
