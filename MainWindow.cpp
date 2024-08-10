@@ -153,7 +153,7 @@ void MainWindow::createActions()
   //m_pActFileSave->setStatusTip(tr("Save current file"));
   //connect(m_pActFileSave, &QAction::triggered, this, &MainWindow::saveFile);
 
-  m_pActFileSaveAs = new QAction(tr("&SAve As"), this);
+  m_pActFileSaveAs = new QAction(tr("&Save as"), this);
   m_pActFileSaveAs->setShortcuts(QKeySequence::SaveAs);
   m_pActFileSaveAs->setStatusTip(tr("Save current file as txt"));
   connect(m_pActFileSaveAs, &QAction::triggered, this, &MainWindow::saveAsFile);
