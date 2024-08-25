@@ -3,13 +3,11 @@
 
 class EdlFile : public QTextStream
 {
-  // Constructor
 public:
-
   /// @brief  EdlFile text stream costructor
-  /// @param  [OUT] device  -  poiner to file for read
+  /// @param  strContent  -  poiner to string with content
   /// @param  [OUT] plainTextEdit  -  pointer to plain text edit widget
-  EdlFile(QIODevice* device, QPlainTextEdit* plainTextEdit) : QTextStream(device) 
+  EdlFile(QString* strContent, QPlainTextEdit* plainTextEdit) : QTextStream(strContent, ReadOnly)
   {
     m_bIsSameSong = false;
     m_strSongName = "";

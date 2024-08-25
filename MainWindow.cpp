@@ -60,6 +60,17 @@ void MainWindow::saveAsFile()
   }
 }
 
+/// @brief  Decoding from the system Locale (or UTF-8 by default)
+/// @param  file  -  File to decode
+/// @return QString of the decoded .EDL file
+QString decodeFile(QFile& file)
+{
+  // Decoding from the system Locale (or UTF-8 by default)
+  QByteArray barrfileData = file.readAll();
+  auto converter = QStringDecoder(QStringDecoder::System);
+  return converter(barrfileData);
+}
+
 void MainWindow::exportEDL()
 {
   QString fileName = QFileDialog::getOpenFileName(this, tr("File to export from"), "", tr("Edit Decision Lists (*.edl);;All files (*.*)"));
@@ -72,7 +83,8 @@ void MainWindow::exportEDL()
   QFile file(fileName);
   if (file.open(QIODevice::ReadOnly | QIODevice::Text))
   {
-    EdlFile edlFile(&file, m_pTextEdit);
+    QString strFileContent(decodeFile(file));
+    EdlFile edlFile(&strFileContent, m_pTextEdit);
     QFileInfo fileInfo(file);
     setWindowTitle(fileInfo.fileName());
     edlFile.parseEdlFile();
