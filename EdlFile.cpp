@@ -40,6 +40,10 @@ void EdlFile::writeContent(const QString& strLine)
     if (strSongName.isEmpty()) 
       return;
 
+    //Ignore names without file format, because it is not songs
+    if (!strSongName.contains("."))
+      return;
+
     strSongName = strSongName.mid(s_strPrefixSongName.length());
   }
 
