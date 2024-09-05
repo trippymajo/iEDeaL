@@ -35,8 +35,12 @@ void EdlFile::writeContent(const QString& strLine)
   if (!QTextStream::atEnd())
   {
     strSongName = QTextStream::readLine();
-    if (!strSongName.isEmpty())
-      strSongName = strSongName.mid(s_strPrefixSongName.length());
+
+    //Ingore timelines with no audio line
+    if (strSongName.isEmpty()) 
+      return;
+
+    strSongName = strSongName.mid(s_strPrefixSongName.length());
   }
 
   //Read first line, set text data
