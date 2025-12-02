@@ -1,4 +1,4 @@
-# 🎞️🎼 iEDeaL - Simple timestamps from EDL (Adobe Premier Pro) 🎼🎥
+# iEDeaL - Simple timestamps from EDL (Adobe Premier Pro)
 
 **iEDeaL** is an EDL parser designed to extract music track names and their timestamps from Adobe Premiere Pro projects.
 It analyzes an EDL file and produces a clean list of all music cues used in the timeline. 
